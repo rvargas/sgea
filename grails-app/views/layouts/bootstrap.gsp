@@ -3,7 +3,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title><g:layoutTitle default="${meta(name: 'app.name')}"/></title>
+		<title><g:message code="layout.mainTitle" default="Sistema de gestión para eventos académicos"/><g:layoutTitle default=""/></title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 
@@ -15,7 +15,7 @@
 		<![endif]-->
 
 		<r:require modules="scaffolding"/>
-
+		<r:require modules="bootstrap-js"/>
 		<!-- Le fav and touch icons -->
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
 		
@@ -35,14 +35,17 @@
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					
+					<%-- 
 					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
+					--%>
 					
-					<a class="brand" href="${createLink(uri: '/')}">Grails Twitter Bootstrap</a>
-
+					<a class="brand" href="${createLink(uri: '/')}"><g:message code="layout.mainTitle" default="Sistema de gestión para eventos académicos"/></a>
+					
+					<%-- 
 					<div class="nav-collapse">
 						<ul class="nav">							
 							<li<%= request.forwardURI == "${createLink(uri: '/')}" ? ' class="active"' : '' %>><a href="${createLink(uri: '/')}">Home</a></li>
@@ -51,6 +54,18 @@
 							</g:each>
 						</ul>
 					</div>
+					--%>
+					
+					<div class="btn-group pull-right">
+						<sec:ifLoggedIn>
+							 <a class="btn btn-primary" href="${createLink(controller:'logout',action:'index') }">Salir</a>
+						</sec:ifLoggedIn>
+						
+						<sec:ifNotLoggedIn>
+							<a class="btn btn-primary" href="${createLink(controller:'login',action:'auth') }">Acceder</a>
+						</sec:ifNotLoggedIn>
+					</div>
+					
 				</div>
 			</div>
 		</nav>
@@ -61,7 +76,7 @@
 			<hr>
 
 			<footer>
-				<p>&copy; Company 2011</p>
+				<p>&copy; Rafael Vargas Rosas 2013</p>
 			</footer>
 		</div>
 

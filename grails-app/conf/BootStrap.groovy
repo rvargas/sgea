@@ -18,6 +18,25 @@ class BootStrap {
 			println "Se han agregado 5 roles."
 		}
 		
+		if(!User.count()){
+			def adminRole = Role.findByAuthority('ROLE_ADMIN')
+			
+			String username
+			String password
+			boolean enabled
+			boolean accountExpired
+			boolean accountLocked
+			boolean passwordExpired
+			
+			def userAdmin = new User(username: 'admin@mail.com', enabled: true, password: 'password').save(flush: true)
+			
+			UserRole.create userAdmin, adminRole, true
+			
+			assert User.count() == 1
+			assert UserRole.count() == 1
+			println "Se ha agregado un usuario con un rol."
+		}
+		
 	}
     def destroy = {
     }
